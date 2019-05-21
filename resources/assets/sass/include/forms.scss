@@ -1,0 +1,31 @@
+div.card {
+
+    div.card-body {
+
+        form {
+            background-color: $form-color;
+            border: 1px solid $grey-color;
+            padding: 25px 20px;
+
+            &.form-inline {
+                background-color: transparent;
+                border: none;
+                padding: 0;
+                white-space: nowrap;
+            }
+        }
+
+    }
+
+}
+
+form {
+
+    &.form-inline {
+
+        &.inline-block {
+            display: inline-block;
+            white-space: nowrap;
+        }
+    }
+}

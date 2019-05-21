@@ -1,0 +1,17 @@
+header {
+
+    &.navbar {
+        margin-top: 2px;
+        border-top: 7px solid $blue-color;
+        background-color: $white-color;
+        z-index: 9999;
+
+        +div.wrapper {
+            padding-top: 100px;
+            position: absolute;
+            top: 0;
+            min-height: 100vh;
+        }
+    }
+
+}

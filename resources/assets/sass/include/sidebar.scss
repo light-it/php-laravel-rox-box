@@ -1,0 +1,53 @@
+.nav-sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background-color: $white-color;
+    border-right: 1px solid $grey-color;
+
+    ul {
+
+        &.collapse, &.collapsing {
+
+            li a {
+                padding-left: 50px;
+            }
+
+        }
+
+        li a {
+            display: block;
+            color: $black-color;
+            font-size: 16px;
+            padding: 15px 30px;
+
+            &:hover {
+                text-decoration: none;
+                color: $blue-color;
+            }
+
+            &.active {
+                color: $blue-color;
+                border-left: 3px solid $blue-color;
+            }
+
+            &[data-toggle="collapse"] {
+                position: relative;
+            }
+
+            &.dropdown-toggle::after {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+            }
+
+            i.fas {
+                width: 35px;
+            }
+
+        }
+
+    }
+
+}

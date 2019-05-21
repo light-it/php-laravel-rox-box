@@ -1,0 +1,16 @@
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 80px;
+    background-color: $white-color;
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: 99999;
+    padding: 0;
+    border-width: 0;
+
+    &:hover {
+        text-decoration: none;
+    }
+}

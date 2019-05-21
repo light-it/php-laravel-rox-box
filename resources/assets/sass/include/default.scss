@@ -1,0 +1,20 @@
+* {
+    box-sizing:border-box;
+}
+
+body {
+    min-width: 250px;
+}
+
+.hide {
+    display: none;
+}
+
+p {
+    padding: 10px 15px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
