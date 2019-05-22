@@ -15,4 +15,10 @@ interface BookingManageService
      */
     public function findOrCreateByWorkshop(Workshop $workshop): Booking;
 
+    /**
+     * @param Workshop $workshop
+     * @return Booking|mixed
+     */
+    public function createByWorkshop(Workshop $workshop): Booking;
+
 }

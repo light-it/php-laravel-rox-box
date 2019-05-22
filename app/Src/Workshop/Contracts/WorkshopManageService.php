@@ -15,7 +15,7 @@ interface WorkshopManageService
     public function getAll(?array $filters = []);
 
     /**
-     * @param array|null $filters
+     * @param mixed $dtStart
      * @return Workshop|null
      */
     public function findByDTStart($dtStart): ?Workshop;

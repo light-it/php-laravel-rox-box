@@ -25,7 +25,7 @@ class ByDateTimeStart implements Criteria
      */
     public function apply(Builder $query)
     {
-        return $query->whereDate(Workshop::COLUMN_DT_START, '=', $this->value);
+        return $query->where(Workshop::COLUMN_DT_START, '=', $this->value);
     }
 
 }

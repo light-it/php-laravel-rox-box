@@ -71,7 +71,7 @@ class CreateBookingRecordJob implements ShouldQueue
         DB::beginTransaction();
         try {
             /** @var Booking $booking */
-            $booking = $bookingManageService->findOrCreateByWorkshop($this->workshop);
+            $booking = $bookingManageService->createByWorkshop($this->workshop);
 
             /** @var Visitor $leader */
             $leader = $visitorManageService->findOrCreate($this->leaderDTO);
@@ -85,8 +85,8 @@ class CreateBookingRecordJob implements ShouldQueue
                 /** @var Visitor $visitor */
                 $visitor = $visitorManageService->findOrCreate($guestDTO);
 
-                /** @var BookingVisitor $leaderBooking */
-                $leaderBooking = $bookingVisitorManageService
+                /** @var BookingVisitor $visitorBooking */
+                $visitorBooking = $bookingVisitorManageService
                     ->findOrCreate($booking, $visitor, $leaderBooking);
             }
 

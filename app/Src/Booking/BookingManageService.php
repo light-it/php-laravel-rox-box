@@ -35,11 +35,21 @@ class BookingManageService implements BookingManageServiceInterface
             $this->bookingRepository::BY_WORKSHOP_ID => $workshop->getKey(),
         ]);
 
-        return $booking
-            ? $booking
-            : $this->bookingRepository->create([
-                Booking::COLUMN_WORKSHOP_ID => $workshop->getKey(),
-            ]);
+        return $booking ? $booking : $this->createByWorkshop($workshop);
+    }
+
+    /**
+     * @param Workshop $workshop
+     * @return Booking|mixed
+     */
+    public function createByWorkshop(Workshop $workshop): Booking
+    {
+        /** @var Booking $booking */
+        $booking = $this->bookingRepository->create([
+            Booking::COLUMN_WORKSHOP_ID => $workshop->getKey(),
+        ]);
+
+        return $booking;
     }
 
 }

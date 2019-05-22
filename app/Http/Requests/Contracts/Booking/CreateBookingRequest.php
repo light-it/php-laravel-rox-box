@@ -10,6 +10,6 @@ interface CreateBookingRequest
     const CUSTOMER_PHONE = 'customer_phone';
     const GUEST = 'guest';
     const NAME = 'name';
-    const EMAIL = 'name';
+    const EMAIL = 'email';
 
 }

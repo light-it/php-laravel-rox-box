@@ -33,7 +33,7 @@ class WorkshopManageService implements WorkshopManageServiceInterface
     }
 
     /**
-     * @param array|null $filters
+     * @param mixed $dtStart
      * @return Workshop|null
      */
     public function findByDTStart($dtStart): ?Workshop

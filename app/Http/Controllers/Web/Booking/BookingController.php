@@ -87,7 +87,7 @@ class BookingController extends Controller
         $workshop = $this->workshopManageService->findByDTStart($dtStart);
         $availableVisitors = $this->workshopManageService->getQtyAvailableVisitors($workshop);
 
-        if (($availableVisitors - count($guests)) < 0) {
+        if (($availableVisitors - (count($guests) + 1)) < 0) {
             return redirect()->back()->with('error', [trans('messages.No more spots', ['qty' => $availableVisitors, ]), ]);
         }
 
