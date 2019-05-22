@@ -31,7 +31,7 @@ class BookingVisitorManageService implements BookingVisitorManageServiceInterfac
      * @param BookingVisitor $bookingVisitor
      * @return BookingVisitor|mixed
      */
-    public function findOrCreateByWorkshop(
+    public function findOrCreate(
         Booking $booking,
         Visitor $visitor,
         ?BookingVisitor $bookingVisitor = null
@@ -46,11 +46,11 @@ class BookingVisitorManageService implements BookingVisitorManageServiceInterfac
             $criterias[$this->bookingVisitorRepository::BY_PARENT_ID] = $bookingVisitor->getKey();
         }
 
-        /** @var BookingVisitor $bookingVisitor */
-        $bookingVisitor = $this->bookingVisitorRepository->findSingleBy($criterias);
+        /** @var BookingVisitor $bookingVisitorRecord */
+        $bookingVisitorRecord = $this->bookingVisitorRepository->findSingleBy($criterias);
 
-        return $bookingVisitor
-            ? $bookingVisitor
+        return $bookingVisitorRecord
+            ? $bookingVisitorRecord
             : $this->bookingVisitorRepository->create([
                 BookingVisitor::COLUMN_BOOKING_ID => $booking->getKey(),
                 BookingVisitor::COLUMN_VISITOR_ID => $visitor->getKey(),

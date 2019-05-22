@@ -16,7 +16,7 @@ interface BookingVisitorManageService
      * @param BookingVisitor $bookingVisitor
      * @return BookingVisitor|mixed
      */
-    public function findOrCreateByWorkshop(
+    public function findOrCreate(
         Booking $booking,
         Visitor $visitor,
         ?BookingVisitor $bookingVisitor = null

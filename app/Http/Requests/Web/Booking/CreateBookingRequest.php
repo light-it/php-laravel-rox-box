@@ -25,7 +25,13 @@ class CreateBookingRequest extends FormRequest implements CreateBookingRequestIn
     public function rules()
     {
         return [
-            self::DATE => 'required|date_format:m/d/Y',
+            self::DATE                                     => 'required|date_format:Y-m-d',
+            self::TIME                                     => 'required|date_format:H:i:s',
+            self::CUSTOMER_NAME                            => 'required|string|min:1|max:64',
+            self::CUSTOMER_PHONE                           => 'required|string|min:1|max:15',
+            self::GUEST                                    => 'nullable|array',
+            sprintf('%1s.*.%2s', self::GUEST, self::NAME)  => sprintf('required_with:%1s|string|min:1|max:64', self::GUEST),
+            sprintf('%1s.*.%2s', self::GUEST, self::EMAIL) => sprintf('required_with:%1s|string|min:1|max:320', self::GUEST),
         ];
     }
 }

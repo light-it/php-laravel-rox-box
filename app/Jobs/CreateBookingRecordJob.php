@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\DTO\VisitorDTO;
 use App\Models\Booking;
 use App\Models\BookingVisitor;
 use App\Models\Visitor;
@@ -13,6 +14,7 @@ use App\Src\Workshop\Contracts\WorkshopManageService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Queue\InteractsWithQueue;
 
 class CreateBookingRecordJob implements ShouldQueue
@@ -20,9 +22,14 @@ class CreateBookingRecordJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable;
 
     /**
-     * @var array
+     * @var VisitorDTO
      */
-    private $data;
+    private $leaderDTO;
+
+    /**
+     * @var array[VisitorDTO]
+     */
+    private $guests;
 
     /**
      * @var Workshop
@@ -33,12 +40,17 @@ class CreateBookingRecordJob implements ShouldQueue
      * Create a new job instance.
      *
      * @param Workshop $workshop
-     * @param array $data
+     * @param VisitorDTO $leaderDTO
+     * @param array[VisitorDTO]|null $guests
      */
-    public function __construct(Workshop $workshop, array $data)
-    {
+    public function __construct(
+        Workshop $workshop,
+        VisitorDTO $leaderDTO,
+        ?array $guests = []
+    ) {
         $this->workshop = $workshop;
-        $this->data = $data;
+        $this->leaderDTO = $leaderDTO;
+        $this->guests = $guests;
     }
 
     /**
@@ -56,10 +68,32 @@ class CreateBookingRecordJob implements ShouldQueue
         VisitorManageService $visitorManageService,
         WorkshopManageService $workshopManageService
     ) {
-        /** @var Booking $booking */
-        $booking = $bookingManageService->findOrCreateByWorkshop($this->workshop);
+        DB::beginTransaction();
+        try {
+            /** @var Booking $booking */
+            $booking = $bookingManageService->findOrCreateByWorkshop($this->workshop);
 
-        dd($this->data);
+            /** @var Visitor $leader */
+            $leader = $visitorManageService->findOrCreate($this->leaderDTO);
+
+            /** @var BookingVisitor $leaderBooking */
+            $leaderBooking = $bookingVisitorManageService
+                ->findOrCreate($booking, $leader);
+
+            /** @var VisitorDTO $guestDTO */
+            foreach ($this->guests as $guestDTO) {
+                /** @var Visitor $visitor */
+                $visitor = $visitorManageService->findOrCreate($guestDTO);
+
+                /** @var BookingVisitor $leaderBooking */
+                $leaderBooking = $bookingVisitorManageService
+                    ->findOrCreate($booking, $visitor, $leaderBooking);
+            }
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+        }
     }
 
 }

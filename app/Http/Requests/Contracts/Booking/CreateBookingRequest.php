@@ -4,6 +4,12 @@ namespace App\Http\Requests\Contracts\Booking;
 
 interface CreateBookingRequest
 {
-    public const DATE = 'date';
+    const DATE = 'date';
+    const TIME = 'time';
+    const CUSTOMER_NAME = 'customer_name';
+    const CUSTOMER_PHONE = 'customer_phone';
+    const GUEST = 'guest';
+    const NAME = 'name';
+    const EMAIL = 'name';
 
 }
