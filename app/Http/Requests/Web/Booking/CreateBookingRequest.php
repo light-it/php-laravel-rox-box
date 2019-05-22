@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Booking;
+namespace App\Http\Requests\Web\Booking;
 
 use App\Http\Requests\Contracts\Booking\CreateBookingRequest as CreateBookingRequestInterface;
 use Illuminate\Foundation\Http\FormRequest;

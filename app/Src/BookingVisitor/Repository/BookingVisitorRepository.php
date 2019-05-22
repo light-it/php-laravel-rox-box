@@ -27,7 +27,7 @@ class BookingVisitorRepository extends Repository implements BookingVisitorRepos
      */
     protected function isSatisfy(Model $model): bool
     {
-        return $model instanceof Booking;
+        return $model instanceof BookingVisitor;
     }
 
 }

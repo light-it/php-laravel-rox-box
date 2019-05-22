@@ -158,7 +158,7 @@ class BookingVisitor extends BaseModel
     /**
      * @return BookingVisitor|null
      */
-    public function getVisitor(): ?BookingVisitor
+    public function getParent(): ?BookingVisitor
     {
         return $this->parent()->first();
     }

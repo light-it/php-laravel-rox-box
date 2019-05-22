@@ -18,9 +18,9 @@ interface Repository
 
     /**
      * @param array $criterias
-     * @return Model
+     * @return Model|null
      */
-    public function findSingleBy(array $criterias): Model;
+    public function findSingleBy(array $criterias): ?Model;
 
     /**
      * @param array $criterias

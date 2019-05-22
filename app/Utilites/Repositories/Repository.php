@@ -115,7 +115,7 @@ abstract class Repository implements RepositoryInterface
      * @return mixed
      * @throws Criterias\Exceptions\CriteriaBuildException
      */
-    public function findSingleBy(array $criterias): Model
+    public function findSingleBy(array $criterias): ?Model
     {
         $results = $this->findBy($criterias);
 
