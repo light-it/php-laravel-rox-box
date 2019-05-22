@@ -14,12 +14,11 @@ return [
             \App\Utilites\Repositories\Criterias\Contracts\DefaultCriteriaDictionary::WITH_DELETED =>
                 \App\Utilites\Repositories\Criterias\DefaultCriterias\WithDeleted::class,
         ],
-
-        'booking' => [
-        ],
-
-        'user' => [
-        ],
+        'booking' => [],
+        'booking_visitor' => [],
+        'user' => [],
+        'visitor' => [],
+        'workshop' => [],
 
     ]
 ];

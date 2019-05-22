@@ -13,4 +13,6 @@ class BaseModel extends Model
 {
     use ModelHelper;
 
+    const DELETED_AT = 'deleted_at';
+
 }

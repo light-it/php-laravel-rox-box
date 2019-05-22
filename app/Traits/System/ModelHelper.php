@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  */
 trait ModelHelper
 {
+
     /**
      * Returns primary key name of current eloquent model.
      *
