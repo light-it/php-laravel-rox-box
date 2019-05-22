@@ -13,7 +13,7 @@ interface BookingVisitorManageService
     /**
      * @param Booking $booking
      * @param Visitor $visitor
-     * @param BookingVisitor $bookingVisitor
+     * @param BookingVisitor|null $bookingVisitor
      * @return BookingVisitor|mixed
      */
     public function findOrCreate(
