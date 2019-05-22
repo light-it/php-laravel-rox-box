@@ -140,12 +140,12 @@ abstract class Repository implements RepositoryInterface
 
     /**
      * @param $results
-     * @return Model
+     * @return Model|null
      */
-    private function getFirstResult(Collection $results): Model
+    private function getFirstResult(Collection $results): ?Model
     {
         if ($results->isEmpty()) {
-            throw new ModelNotFoundException();
+            return null;
         }
 
         return $results->first();

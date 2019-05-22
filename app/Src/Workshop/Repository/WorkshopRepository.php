@@ -30,4 +30,35 @@ class WorkshopRepository extends Repository implements WorkshopRepositoryInterfa
         return $model instanceof Workshop;
     }
 
+    /**
+     * @param Workshop $model
+     * @return int
+     */
+    public function getQtyBookedVisitors(Workshop $model): int
+    {
+        $bookedVisitors = 0;
+
+        $bookings = $model->getBookings();
+        if ($bookings->isEmpty()) {
+            return $bookedVisitors;
+        }
+
+        $bookedVisitors = $bookings->sum(function ($booking) {
+            return $booking->getVisitors()->count();
+        });
+
+        return $bookedVisitors;
+    }
+
+    /**
+     * @param Workshop $model
+     * @return int
+     */
+    public function getQtyAvailableVisitors(Workshop $model): int
+    {
+        $availableVisitors = $model->getMaxVisitors() - $this->getQtyBookedVisitors($model);
+
+        return $availableVisitors > 0 ? $availableVisitors : 0;
+    }
+
 }
