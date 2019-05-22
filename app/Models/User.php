@@ -5,7 +5,6 @@ namespace App\Models;
 class User extends BaseModel
 {
 
-    public const COLUMN_KEY = 'id';
     public const COLUMN_EMAIL = 'email';
 
     /**

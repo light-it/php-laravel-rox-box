@@ -14,7 +14,7 @@ class UserManageService implements UserManageServiceInterface
     private $userRepository;
 
     /**
-     * UserManageService constructor.
+     * Service constructor.
      * @param UserRepository $userRepository
      */
     public function __construct(UserRepository $userRepository)

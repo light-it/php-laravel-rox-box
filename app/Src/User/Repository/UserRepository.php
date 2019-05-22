@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserRepository extends Repository implements UserRepositoryInterface
 {
     /**
-     * UserRepository constructor.
+     * Repository constructor.
      * @param UserCriteriaFactory $factory
      * @param User $model
      * @throws RepositoryException

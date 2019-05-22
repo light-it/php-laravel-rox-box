@@ -42,9 +42,9 @@ class BookingController extends Controller
     public function store(CreateBookingRequest $request)
     {
         //$bookingData = new BookingDTO($request->validated());
-        $expense = $this->bookingManageService->create(/*$bookingData*/);
+        $booking = $this->bookingManageService->create(/*$bookingData*/);
 
-        return $expense
+        return $booking
             ? redirect()->route('booking')
             : redirect()->back()->with('error', [trans('An error occurred.'), ]);
     }

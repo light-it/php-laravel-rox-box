@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookingRepository extends Repository implements BookingRepositoryInterface
 {
     /**
-     * BookingRepository constructor.
+     * Repository constructor.
      * @param BookingCriteriaFactory $factory
      * @param Booking $model
      * @throws RepositoryException

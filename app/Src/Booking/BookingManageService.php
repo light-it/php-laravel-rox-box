@@ -14,7 +14,7 @@ class BookingManageService implements BookingManageServiceInterface
     private $bookingRepository;
 
     /**
-     * BookingManageService constructor.
+     * Service constructor.
      * @param BookingRepository $bookingRepository
      */
     public function __construct(BookingRepository $bookingRepository)
