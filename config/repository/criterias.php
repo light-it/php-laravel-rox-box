@@ -1,4 +1,5 @@
 <?php
+
 return [
     'schema' => [
         'default' => [
@@ -47,5 +48,5 @@ return [
                 \App\Src\Workshop\Repository\Criterias\OrderByDatetimeStart::class,
         ],
 
-    ]
+    ],
 ];

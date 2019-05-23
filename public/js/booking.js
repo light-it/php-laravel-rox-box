@@ -192,9 +192,6 @@ $(document).ready(function () {
         'datetime': datetime,
         'qty': qty
       },
-      'beforeSend': function beforeSend() {
-        ClearMessages();
-      },
       'success': function success(response) {
         $('button[type="submit"], a[data-section="add_guest"]').attr('disabled', false);
         AddMessage('success', response.message);
@@ -226,9 +223,24 @@ $(document).ready(function () {
   } // adds message by message type and text
 
 
-  function ClearMessages() {
+  function ClearMessages(type) {
     var messageSection = $('[data-section="messages"]');
-    messageSection.empty();
+    var messageClass = '';
+
+    switch (type) {
+      case 'success':
+        messageClass = '.alert-success';
+        break;
+
+      case 'error':
+        messageClass = '.alert-danger';
+        break;
+
+      default:
+        break;
+    }
+
+    messageSection.find('div.alert' + messageClass).empty().remove();
   }
 });
 

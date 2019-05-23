@@ -15,6 +15,6 @@ interface ShopifyService
     /*
      * @return Collection
     */
-    public function getCustomers();
+    public function getCustomers(): Collection;
 
 }

@@ -11,6 +11,7 @@ use App\Src\Booking\Contracts\BookingManageService;
 use App\Src\BookingVisitor\Contracts\BookingVisitorManageService;
 use App\Src\Visitor\Contracts\VisitorManageService;
 use App\Src\Workshop\Contracts\WorkshopManageService;
+use App\Utilites\Weather\Contracts\WeatherService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -60,13 +61,15 @@ class CreateBookingRecordJob implements ShouldQueue
      * @param BookingVisitorManageService $bookingVisitorManageService
      * @param VisitorManageService $visitorManageService
      * @param WorkshopManageService $workshopManageService
+     * @param WeatherService $weatherService
      * @return mixed
      */
     public function handle(
         BookingManageService $bookingManageService,
         BookingVisitorManageService $bookingVisitorManageService,
         VisitorManageService $visitorManageService,
-        WorkshopManageService $workshopManageService
+        WorkshopManageService $workshopManageService,
+        WeatherService $weatherService
     ) {
         DB::beginTransaction();
         try {
@@ -90,8 +93,12 @@ class CreateBookingRecordJob implements ShouldQueue
                     ->findOrCreate($booking, $visitor, $leaderBooking);
             }
 
+            /** @var string $weather */
+            $weather = $weatherService->getWeather();
+            //TODO: store weather to database, create migration, service, repository, model
+
             DB::commit();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
         }
     }

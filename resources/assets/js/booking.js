@@ -114,14 +114,11 @@ $(document).ready(function () {
             'headers': {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'cache-control': 'no-cache',
+                'cache-control': 'no-cache'
             },
             'data': {
                 'datetime': datetime,
                 'qty': qty
-            },
-            'beforeSend': function() {
-                ClearMessages();
             },
             'success': function(response) {
                 $('button[type="submit"], a[data-section="add_guest"]').attr('disabled', false);
@@ -153,9 +150,22 @@ $(document).ready(function () {
     }
 
     // adds message by message type and text
-    function ClearMessages() {
+    function ClearMessages(type) {
         var messageSection = $('[data-section="messages"]');
-        messageSection.empty();
+
+        var messageClass = '';
+        switch (type) {
+            case 'success':
+                messageClass = '.alert-success';
+                break;
+            case 'error':
+                messageClass = '.alert-danger';
+                break;
+            default:
+                break;
+        }
+
+        messageSection.find('div.alert' + messageClass).empty().remove();
     }
 
 });

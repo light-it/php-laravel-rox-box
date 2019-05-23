@@ -21,7 +21,6 @@ final class ShopifyService implements ShopifyServiceInterface
     /**
      * ShopifyService constructor.
      * @param Shopify $shopify
-     * @param string $accessToken
      */
     public function __construct(Shopify $shopify)
     {
@@ -31,7 +30,7 @@ final class ShopifyService implements ShopifyServiceInterface
     /*
      * @return Collection
     */
-    public function getCustomers()
+    public function getCustomers(): Collection
     {
         /** @var Collection $customers */
         $customers = collect([]);
@@ -44,7 +43,7 @@ final class ShopifyService implements ShopifyServiceInterface
                     'phone' => data_get($customer, 'phone'),
                 ];
             });
-        } catch (Exception $e) { }
+        } catch (\Exception $e) { }
 
         return $customers;
     }
