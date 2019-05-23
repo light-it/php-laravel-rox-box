@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'request.transform' => CustomMiddleware\Booking\RequestTransformMiddleware::class,
+        'check.slots' => CustomMiddleware\Booking\CheckSlotsMiddleware::class,
     ];
 
     /**
@@ -79,6 +81,8 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
+        'request.transform',
+        'check.slots',
     ];
 
     /**

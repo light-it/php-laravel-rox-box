@@ -52,4 +52,37 @@ class WorkshopManageService implements WorkshopManageServiceInterface
         return $this->workshopRepository->getQtyAvailableVisitors($workshop);
     }
 
+    /**
+     * @return array
+     */
+    public function getSchdedule(): array
+    {
+        $schedule = [];
+
+        $workshops = $this->getAll();
+        $workshops->each(function($workshop) use (&$schedule) {
+            $date = $workshop->getDTStart()->format('Y-m-d');
+            $item = data_get($schedule, $date);
+            if (!$item) {
+                $item = [
+                    'title' => $workshop->getDTStart()->format('M jS'),
+                    'time'  => [],
+                ];
+            }
+
+            $item['time'][] = [
+                'title' => sprintf(
+                    '%1s - %2s',
+                    $workshop->getDTStart()->format('gA'),
+                    $workshop->getDTEnd()->format('gA')
+                ),
+                'value' => $workshop->getDTStart()->format('H:i:s'),
+            ];
+
+            $schedule[$date] = $item;
+        });
+
+        return $schedule;
+    }
+
 }

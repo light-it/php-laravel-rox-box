@@ -12,4 +12,9 @@ interface CreateBookingRequest
     const NAME = 'name';
     const EMAIL = 'email';
 
+    const DATETIME = 'datetime';
+    const LEADER = 'leader';
+    const VISITORS = 'visitors';
+    const QTY = 'qty';
+
 }

@@ -113,7 +113,8 @@
                             </div>
 
                             <script type="application/javascript">
-                                var schedule = {!! json_encode($schedule) !!};
+                                var SCHEDULE = {!! json_encode($schedule) !!};
+                                var CUSTOMERS = {!! json_encode($customers) !!};
                             </script>
 
                         </form>

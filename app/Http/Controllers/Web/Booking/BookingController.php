@@ -44,31 +44,15 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $schedule = [];
-        $workshops = $this->workshopManageService->getAll();
-        $workshops->each(function($workshop) use (&$schedule) {
-            $date = $workshop->getDTStart()->format('Y-m-d');
-            $item = data_get($schedule, $date);
-            if (!$item) {
-                $item = [
-                    'title' => $workshop->getDTStart()->format('M jS'),
-                    'time'  => [],
-                ];
-            }
+        /** @var array $schedule */
+        $schedule = $this->workshopManageService->getSchdedule();
 
-            $item['time'][] = [
-                'title' => sprintf(
-                    '%1s - %2s',
-                    $workshop->getDTStart()->format('gA'),
-                    $workshop->getDTEnd()->format('gA')
-                ),
-                'value' => $workshop->getDTStart()->format('H:i:s'),
-            ];
+        $customers = [
+            ['name' => 'aaaa', 'phone' => '123', ],
+            ['name' => 'bbbb', 'phone' => '321', ],
+        ];
 
-            $schedule[$date] = $item;
-        });
-
-        return view('booking.form', compact('schedule'));
+        return view('booking.form', compact('schedule', 'customers'));
     }
 
     /**
@@ -79,33 +63,15 @@ class BookingController extends Controller
      */
     public function store(CreateBookingRequest $request)
     {
-        $invalides = false;
-        $guests = $request->get($request::GUEST, []);
-        $dtStart = Carbon::parse(sprintf('%1s %2s', $request->get($request::DATE), $request->get($request::TIME)));
+        /** @var Carbon $dtStart */
+        $dtStart = $request->get(CreateBookingRequest::DATETIME);
+        /** @var VisitorDTO $leaderDTO */
+        $leaderDTO = $request->get(CreateBookingRequest::LEADER);
+        /** @var array[VisitorDTO] $visitors */
+        $visitors = $request->get(CreateBookingRequest::VISITORS);
 
         /** @var Workshop $workshop */
         $workshop = $this->workshopManageService->findByDTStart($dtStart);
-        $availableVisitors = $this->workshopManageService->getQtyAvailableVisitors($workshop);
-
-        if (($availableVisitors - (count($guests) + 1)) < 0) {
-            return redirect()->back()->with('error', [trans('messages.No more spots', ['qty' => $availableVisitors, ]), ]);
-        }
-
-        /** @var VisitorDTO $leaderDTO */
-        $leaderDTO = new VisitorDTO([
-            VisitorDTO::NAME  => $request->get($request::CUSTOMER_NAME),
-            VisitorDTO::PHONE => $request->get($request::CUSTOMER_PHONE),
-        ]);
-
-        $visitors = [];
-
-        foreach ($guests as $guest) {
-            /** @var array[VisitorDTO] $visitors */
-            $visitors[] = new VisitorDTO([
-                VisitorDTO::NAME  => $guest[CreateBookingRequest::NAME],
-                VisitorDTO::EMAIL => $guest[CreateBookingRequest::EMAIL],
-            ]);
-        }
 
         CreateBookingRecordJob::dispatch($workshop, $leaderDTO, $visitors)->onQueue('booking');
 

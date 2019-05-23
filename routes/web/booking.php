@@ -15,6 +15,13 @@ Route::group(
     ['namespace' => 'Web\Booking', ],
     function () {
         Route::get('/workshop-booking', 'BookingController@index')->name('booking');
-        Route::post('/workshop-booking', 'BookingController@store')->name('booking.store');
+
+        Route::group(
+            ['middleware' => ['request.transform', 'check.slots', ], ],
+            function () {
+                Route::post('/workshop-booking', 'BookingController@store')->name('booking.store');
+            }
+        );
+
     }
 );

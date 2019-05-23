@@ -26,4 +26,9 @@ interface WorkshopManageService
      */
     public function getQtyAvailableVisitors(Workshop $workshop): int;
 
+    /**
+     * @return array
+     */
+    public function getSchdedule(): array;
+
 }
