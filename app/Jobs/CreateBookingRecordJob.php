@@ -20,7 +20,9 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class CreateBookingRecordJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
 
     /**
      * @var VisitorDTO
@@ -95,6 +97,7 @@ class CreateBookingRecordJob implements ShouldQueue
 
             /** @var string $weather */
             $weather = $weatherService->getWeather();
+
             //TODO: store weather to database, create migration, service, repository, model
 
             DB::commit();
