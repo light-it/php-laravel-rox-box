@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-12" data-section="messages">
 
             @if (session()->has('success'))
                 <div class="alert alert-success">

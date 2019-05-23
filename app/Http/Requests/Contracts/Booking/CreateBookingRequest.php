@@ -16,5 +16,6 @@ interface CreateBookingRequest
     const LEADER = 'leader';
     const VISITORS = 'visitors';
     const QTY = 'qty';
+    const AVAILABLE_VISITORS = 'available_visitors';
 
 }

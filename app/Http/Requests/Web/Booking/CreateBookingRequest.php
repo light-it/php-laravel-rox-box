@@ -34,4 +34,5 @@ class CreateBookingRequest extends FormRequest implements CreateBookingRequestIn
             sprintf('%1s.*.%2s', self::GUEST, self::EMAIL) => sprintf('required_with:%1s|string|min:1|max:320', self::GUEST),
         ];
     }
+
 }

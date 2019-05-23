@@ -15,10 +15,10 @@ use Illuminate\Http\Request;
 
 Route::group(
     [
-        'namespace' => 'Api\v1\Test',
-        'middleware' => ['auth:api', ],
+        'namespace' => 'Api\v1\Booking',
+        'middleware' => ['check.slots', ],
     ],
     function () {
-        Route::get('test', 'TestController@index');
+        Route::get('booking/check-slots', 'BookingController@checkSlots');
     }
 );

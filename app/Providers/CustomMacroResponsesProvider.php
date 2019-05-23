@@ -28,14 +28,14 @@ class CustomMacroResponsesProvider extends ServiceProvider
     public function boot()
     {
         $fractal_manager = App::make('FractalManager');
-        
+
         /**
          * Empty response macros
          */
         Response::macro('empty', function($status_code = 201) {
             return response()->make(null, $status_code);
         });
-        
+
         /**
          * Success response macros
          */
@@ -43,23 +43,23 @@ class CustomMacroResponsesProvider extends ServiceProvider
             if (is_int($data)) {
                 $data = [
                     'status'  => 'success',
-                    'message' => trans('api.' . $data),
+                    'message' => trans($data),
                 ];
             }
             return response()->make($data, $status_code);
         });
-        
+
         /**
          * Responser with error
          */
         Response::macro('error', function ($error, $status_code = 422, $errors = null) {
             return response()->make([
                 'status_code' => $status_code,
-                'message'     => trans('api.' . $error),
+                'message'     => trans($error),
                 'errors'      => ($errors) ? $errors : [],
             ], $status_code);
         });
-        
+
         /**
          * Responser with error
          */

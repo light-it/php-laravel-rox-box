@@ -54,6 +54,10 @@ class CheckSlotsMiddleware extends BaseMiddleware
             }
         }
 
+        $request->merge([
+            CreateBookingRequest::AVAILABLE_VISITORS => $availableVisitors,
+        ]);
+
         return $next($request);
     }
 

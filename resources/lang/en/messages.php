@@ -15,5 +15,6 @@ return [
 
     'No more spots' => 'Sorry, there are only :qty more available spots for this workshop.',
     'Booking saved' => 'Booking has been successfully saved.',
+    'Available slots' => 'There are :qty more available spots for this workshop.',
 
 ];

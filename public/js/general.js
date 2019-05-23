@@ -15662,10 +15662,7 @@ __webpack_require__.r(__webpack_exports__);
 window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_0___default.a;
 
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
-  // add date input
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-field-type="date"]').datepicker();
-});
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {});
 
 /***/ }),
 
