@@ -9,7 +9,9 @@ use App\Jobs\CreateBookingRecordJob;
 use App\Models\Workshop;
 use App\Src\Booking\Contracts\BookingManageService;
 use App\Src\Workshop\Contracts\WorkshopManageService;
+use App\Utilites\Shopify\Contracts\ShopifyService;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class BookingController extends Controller
 {
@@ -25,16 +27,24 @@ class BookingController extends Controller
     private $workshopManageService;
 
     /**
+     * @var ShopifyService
+     */
+    private $shopifyService;
+
+    /**
      * Controller constructor.
      * @param BookingManageService $bookingManageService
      * @param WorkshopManageService $workshopManageService
+     * @param ShopifyService $shopifyService
      */
     public function __construct(
         BookingManageService $bookingManageService,
-        WorkshopManageService $workshopManageService
+        WorkshopManageService $workshopManageService,
+        ShopifyService $shopifyService
     ) {
         $this->bookingManageService = $bookingManageService;
         $this->workshopManageService = $workshopManageService;
+        $this->shopifyService = $shopifyService;
     }
 
     /**
@@ -46,11 +56,8 @@ class BookingController extends Controller
     {
         /** @var array $schedule */
         $schedule = $this->workshopManageService->getSchdedule();
-
-        $customers = [
-            ['name' => 'aaaa', 'phone' => '123', ],
-            ['name' => 'bbbb', 'phone' => '321', ],
-        ];
+        /** @var Collection $customers */
+        $customers = $this->shopifyService->getCustomers();
 
         return view('booking.form', compact('schedule', 'customers'));
     }

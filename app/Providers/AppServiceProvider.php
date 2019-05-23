@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Utilites\Adapters\Config\Contracts\ConfigRepository;
 use App\Utilites\Adapters\Container\Contracts\Container;
+use App\Utilites\Shopify\Contracts\ShopifyService;
 use Illuminate\Support\ServiceProvider;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\ArraySerializer;
+use Oseintow\Shopify\Facades\Shopify;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,9 +36,29 @@ class AppServiceProvider extends ServiceProvider
             ConfigRepository::class,
             \App\Utilites\Adapters\Config\ConfigRepository::class
         );
+
         $this->app->bind(
             Container::class,
             \App\Utilites\Adapters\Container\Container::class
+        );
+
+        $this->app->bind(
+            \App\Utilites\Shopify\ShopifyService::class,
+            function ($app, $parameters) {
+                $shopifyConfig = $app->make('config')->get('shopify');
+
+                $shopify = Shopify::setShopUrl($shopifyConfig['domain'])
+                    ->setKey($shopifyConfig['key'])
+                    ->setSecret($shopifyConfig['secret'])
+                    ->setAccessToken($shopifyConfig['token']);
+
+                return new \App\Utilites\Shopify\ShopifyService($shopify);
+            }
+        );
+
+        $this->app->bind(
+            ShopifyService::class,
+            \App\Utilites\Shopify\ShopifyService::class
         );
     }
 
