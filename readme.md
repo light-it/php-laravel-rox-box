@@ -19,10 +19,8 @@ Laravel is accessible, yet powerful, providing powerful tools needed for large, 
 git clone https://github.com/light-it/php-laravel-rox-box.git
 git checkout master
 ```
-
-2. Checkout staging branch
-3. Create MySQL schema
-4. Make sure that your .env file is correct
+2. Create MySQL schema
+3. Make sure that your .env file is correct
 ```
 cp .env.example .env
 
@@ -34,44 +32,44 @@ set DB_CONNECTION=mysql
     DB_PASSWORD=database_password
 ```
 
-5. Create virtual host
-6. Execute the next commands
+4. Create virtual host
+5. Execute the next commands
 
-  - 6.1. to install/update packages:
+  - 5.1. to install/update packages:
 ```
 composer install
 ```
-  - 6.2. to init application key:
+  - 5.2. to init application key:
 ```
 php artisan key:generate
 ```
 
-  - 6.3. to apply new config-params:
+  - 5.3. to apply new config-params:
 ```
 php artisan config:clear
 ```
 
-  - 6.4. install npm packages:
+  - 5.4. install npm packages:
 ```
 npm install
 ```
 
-  - 6.5. to create tables in the DB:
+  - 5.5. to create tables in the DB:
 ```
 php artisan migrate
 ```
 
-  - 6.6. to run seeders for DB:
+  - 5.6. to run seeders for DB:
 ```
 php artisan db:seed
 ```
 
-  - 6.7. to create routes:
+  - 5.7. to create routes:
 ```
 php artisan route:clear
 ```
 
-  - 6.8. to build all css and js scripts (one of these commands) [optional]:
+  - 5.8. to build all css and js scripts (one of these commands) [optional]:
 ```
 npm run development
 npm run production
