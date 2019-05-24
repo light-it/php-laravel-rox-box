@@ -6,6 +6,7 @@ use App\Src\Booking\Contracts\BookingManageService;
 use App\Src\BookingVisitor\Contracts\BookingVisitorManageService;
 use App\Src\User\Contracts\UserManageService;
 use App\Src\Visitor\Contracts\VisitorManageService;
+use App\Src\Weather\Contracts\WeatherManageService;
 use App\Src\Workshop\Contracts\WorkshopManageService;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,6 +38,11 @@ class ServicesProvider extends ServiceProvider
         $this->app->bind(
             VisitorManageService::class,
             \App\Src\Visitor\VisitorManageService::class
+        );
+
+        $this->app->bind(
+            WeatherManageService::class,
+            \App\Src\Weather\WeatherManageService::class
         );
 
         $this->app->bind(

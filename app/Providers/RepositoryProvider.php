@@ -6,6 +6,7 @@ use App\Src\Booking\Repository\Contracts\BookingRepository;
 use App\Src\BookingVisitor\Repository\Contracts\BookingVisitorRepository;
 use App\Src\User\Repository\Contracts\UserRepository;
 use App\Src\Visitor\Repository\Contracts\VisitorRepository;
+use App\Src\Weather\Repository\Contracts\WeatherRepository;
 use App\Src\Workshop\Repository\Contracts\WorkshopRepository;
 use App\Utilites\Repositories\Contracts\Repository;
 use Illuminate\Support\ServiceProvider;
@@ -42,6 +43,11 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(
             VisitorRepository::class,
             \App\Src\Visitor\Repository\VisitorRepository::class
+        );
+
+        $this->app->bind(
+            WeatherRepository::class,
+            \App\Src\Weather\Repository\WeatherRepository::class
         );
 
         $this->app->bind(

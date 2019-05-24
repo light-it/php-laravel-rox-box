@@ -6,10 +6,12 @@ use App\DTO\VisitorDTO;
 use App\Models\Booking;
 use App\Models\BookingVisitor;
 use App\Models\Visitor;
+use App\Models\Weather;
 use App\Models\Workshop;
 use App\Src\Booking\Contracts\BookingManageService;
 use App\Src\BookingVisitor\Contracts\BookingVisitorManageService;
 use App\Src\Visitor\Contracts\VisitorManageService;
+use App\Src\Weather\Contracts\WeatherManageService;
 use App\Src\Workshop\Contracts\WorkshopManageService;
 use App\Utilites\Weather\Contracts\WeatherService;
 use Illuminate\Bus\Queueable;
@@ -59,20 +61,26 @@ class CreateBookingRecordJob implements ShouldQueue
     /**
      * Execute the job.
      *
+     * Creates booking record with attached leader, visitors
+     * and weather data based on leader's geolocation.
+     *
      * @param BookingManageService $bookingManageService
      * @param BookingVisitorManageService $bookingVisitorManageService
      * @param VisitorManageService $visitorManageService
+     * @param WeatherManageService $weatherManageService
      * @param WorkshopManageService $workshopManageService
      * @param WeatherService $weatherService
-     * @return mixed
+     * @return bool
      */
     public function handle(
         BookingManageService $bookingManageService,
         BookingVisitorManageService $bookingVisitorManageService,
         VisitorManageService $visitorManageService,
+        WeatherManageService $weatherManageService,
         WorkshopManageService $workshopManageService,
         WeatherService $weatherService
-    ) {
+    ): bool
+    {
         DB::beginTransaction();
         try {
             /** @var Booking $booking */
@@ -95,15 +103,20 @@ class CreateBookingRecordJob implements ShouldQueue
                     ->findOrCreate($booking, $visitor, $leaderBooking);
             }
 
-            /** @var string $weather */
-            $weather = $weatherService->getWeather();
+            /** @var string $weatherData */
+            $weatherData = $weatherService->getWeather();
 
-            //TODO: store weather to database, create migration, service, repository, model
+            /** @var Weather $weather */
+            $weather = $weatherManageService->create($booking, $leader, $weatherData);
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+
+            return false;
         }
+
+        return true;
     }
 
 }

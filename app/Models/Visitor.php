@@ -45,11 +45,27 @@ class Visitor extends BaseModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function weathers()
+    {
+        return $this->hasMany(Weather::class, Weather::COLUMN_VISITOR_ID);
+    }
+
+    /**
      * @return mixed
      */
     public function getBookings()
     {
         return $this->bookings;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeathers()
+    {
+        return $this->weathers;
     }
 
     /**

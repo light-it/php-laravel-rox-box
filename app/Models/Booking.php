@@ -41,6 +41,14 @@ class Booking extends BaseModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function weathers()
+    {
+        return $this->hasMany(Weather::class, Weather::COLUMN_BOOKING_ID);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function workshop()
@@ -54,6 +62,14 @@ class Booking extends BaseModel
     public function getVisitors()
     {
         return $this->bookingVisitors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeathers()
+    {
+        return $this->weathers;
     }
 
     /**
