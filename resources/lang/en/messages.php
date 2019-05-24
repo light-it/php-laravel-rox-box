@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'No more spots' => 'Sorry, there are only :qty more available spots for this workshop.',
-    'Booking saved' => 'Booking has been successfully saved.',
-    'Available slots' => 'There are :qty more available spots for this workshop.',
+    'no_more_spots' => 'Sorry, there are only :qty more available spots for this workshop.',
+    'booking_saved' => 'Booking has been successfully saved.',
+    'available_slots' => 'There are :qty more available spots for this workshop.',
 
 ];

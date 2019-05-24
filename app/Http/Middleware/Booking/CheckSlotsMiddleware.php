@@ -45,7 +45,7 @@ class CheckSlotsMiddleware extends BaseMiddleware
 
         if (($availableVisitors - $qty) < 0) {
             /** @var string $message */
-            $message = trans('messages.No more spots', ['qty' => $availableVisitors, ]);
+            $message = trans('messages.no_more_spots', ['qty' => $availableVisitors, ]);
 
             if ($request->wantsJson()) {
                 return response()->error($message);

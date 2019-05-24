@@ -18,7 +18,7 @@ class BookingController extends Controller
     public function checkSlots(BookingRequest $request)
     {
         $availableVisitors = $request->get(BookingRequest::AVAILABLE_VISITORS, 0);
-        $message = trans('messages.Available slots', ['qty' => $availableVisitors, ]);
+        $message = trans('messages.available_slots', ['qty' => $availableVisitors, ]);
 
         return response()->success(['message' => $message]);
     }

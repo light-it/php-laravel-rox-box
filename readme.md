@@ -32,6 +32,9 @@ set DB_CONNECTION=mysql
     DB_PASSWORD=database_password
 ```
 
+.env.example file provides required keys and tokens for 3rd party services for comfort testing.
+
+
 4. Create virtual host
 5. Execute the next commands
 

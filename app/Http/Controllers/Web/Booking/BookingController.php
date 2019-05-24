@@ -82,7 +82,7 @@ class BookingController extends Controller
 
         CreateBookingRecordJob::dispatch($workshop, $leaderDTO, $visitors)->onQueue('booking');
 
-        return redirect()->back()->with('success', [trans('messages.Booking saved')]);
+        return redirect()->back()->with('success', [trans('messages.booking_saved')]);
     }
 
 }
