@@ -42,7 +42,7 @@ class CRMSystemFactory implements CRMSystems
     /**
      * @param string $name
      * @return CRMSystem
-     * @throws BuildCsvConfigException
+     * @throws BuildCRMSystemException
      */
     public function createCRMSystem(string $name): CRMSystem
     {
