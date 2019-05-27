@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Utilites\Shopify;
+namespace App\Utilites\CRM\Commerce\Shopify;
 
-use App\Utilites\Shopify\Contracts\ShopifyService as ShopifyServiceInterface;
+use App\Utilites\CRM\Commerce\Shopify\Contracts\ShopifyService as ShopifyServiceInterface;
+use App\Utilites\CRM\Types\Contracts\CRMSystem;
 use Illuminate\Support\Collection;
 use Oseintow\Shopify\Shopify;
 
 /**
  * Class ShopifyService
- * @package App\Utilites\Shopify
+ * @package App\Utilites\CRM\Commerce\Shopify
  */
-final class ShopifyService implements ShopifyServiceInterface
+final class ShopifyService implements CRMSystem, ShopifyServiceInterface
 {
 
     /**

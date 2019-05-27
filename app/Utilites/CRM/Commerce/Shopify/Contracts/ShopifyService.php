@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Utilites\Shopify\Contracts;
+namespace App\Utilites\CRM\Commerce\Shopify\Contracts;
 
 use Illuminate\Support\Collection;
-use Oseintow\Shopify\Shopify;
 
 /**
  * Interface ShopifyService

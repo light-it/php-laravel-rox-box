@@ -21,7 +21,7 @@ final class GeoService implements GeoServiceInterface
     private $geoIP;
 
     /**
-     * ShopifyService constructor.
+     * GeoService constructor.
      * @param GeoIP $geoIP
      */
     public function __construct(GeoIP $geoIP)

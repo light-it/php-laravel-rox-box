@@ -176,6 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\CustomMacroResponsesProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\UtilitesProvider::class,
 
 
         \App\Providers\ServicesProvider::class,

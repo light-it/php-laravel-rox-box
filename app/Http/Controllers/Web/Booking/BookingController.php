@@ -9,6 +9,8 @@ use App\Jobs\CreateBookingRecordJob;
 use App\Models\Workshop;
 use App\Src\Booking\Contracts\BookingManageService;
 use App\Src\Workshop\Contracts\WorkshopManageService;
+use App\Utilites\CRM\Contracts\CRMSystems;
+use App\Utilites\CRM\Types\Contracts\CRMSystem;
 use App\Utilites\Shopify\Contracts\ShopifyService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -27,24 +29,24 @@ class BookingController extends Controller
     private $workshopManageService;
 
     /**
-     * @var ShopifyService
+     * @var CRMSystems
      */
-    private $shopifyService;
+    private $crmSystemService;
 
     /**
      * Controller constructor.
      * @param BookingManageService $bookingManageService
      * @param WorkshopManageService $workshopManageService
-     * @param ShopifyService $shopifyService
+     * @param CRMSystems $crmSystemService
      */
     public function __construct(
         BookingManageService $bookingManageService,
         WorkshopManageService $workshopManageService,
-        ShopifyService $shopifyService
+        CRMSystems $crmSystemService
     ) {
         $this->bookingManageService = $bookingManageService;
         $this->workshopManageService = $workshopManageService;
-        $this->shopifyService = $shopifyService;
+        $this->crmSystemService = $crmSystemService;
     }
 
     /**
@@ -56,8 +58,12 @@ class BookingController extends Controller
     {
         /** @var array $schedule */
         $schedule = $this->workshopManageService->getSchdedule();
-        /** @var Collection $customers */
-        $customers = $this->shopifyService->getCustomers();
+
+        /** @var CRMSystem|ShopifyService  $shopifyService */
+        $shopifyService = $this->crmSystemService->createCRMSystem('shopify');
+
+        /** @var Collection$customers */
+        $customers = $shopifyService->getCustomers();
 
         return view('booking.form', compact('schedule', 'customers'));
     }
